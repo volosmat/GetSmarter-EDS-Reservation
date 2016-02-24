@@ -32,6 +32,13 @@ public class Applicant extends Property {
 		JSONObject emailProperty = this.getPropertyByName(inputProperties, CaseProperties.PROP_EMAIL);
 		
 		JSONArray result = new JSONArray();
+		
+		String emailPropertyValue = (String)emailProperty.get("value");
+		// Update applicant info only when applicant fields are not set
+		if (emailPropertyValue != null && !emailPropertyValue.isEmpty()) {
+			return result;
+		}
+		
 		String loginEmail = this.getUserLoginEmail();
 		User userDetail = new User(loginEmail);
 		
